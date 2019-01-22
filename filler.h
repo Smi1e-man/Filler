@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 15:32:11 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/21 18:05:51 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/22 16:27:45 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ typedef struct	s_f
 {
 	char		**plato;
 	int			xy[2];
+
+	int			pnt;
+	int			numb;
 
 }				t_fllr2;
 

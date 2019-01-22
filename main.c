@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 15:05:06 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/21 19:40:34 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/22 14:13:50 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	save_xy(t_quest	*elem, int fd, char *line, char type)
 		get_next_line(fd, &line);
 		elem->map->xy[0] = ft_atoi(ft_strchr(line, ' '));
 		elem->map->xy[1] = ft_atoi(ft_strrchr(line, ' '));
-		elem->map->xy[0] += 1;
 	}
 	else
 	{
@@ -68,14 +67,14 @@ int		main(void)
 		save_xy(elem, fd, line, '1');
 		get_next_line(fd, &line);
 		plato_malloc(elem->map, fd, line, '1');
-		ft_printf("%d\n%d\n", elem->map->xy[0] - 1, elem->map->xy[1]);
+		ft_printf("%d\n%d\n", elem->map->xy[0], elem->map->xy[1]);
 		i = 0;
 		while(i < elem->map->xy[0])
 		{
 			ft_printf("%s\n", elem->map->plato[i]);
 			i++;
 		}
-		elem->map->xy[0] -= 1;
+		// elem->map->xy[0] -= 1;
 		save_xy(elem, fd, line, '0');
 		ft_printf("%d\n%d\n", elem->ttrmn->xy[0], elem->ttrmn->xy[1]);
 		plato_malloc(elem->ttrmn, fd, line, '0');
@@ -85,7 +84,7 @@ int		main(void)
 			ft_printf("%s\n", elem->ttrmn->plato[i]);
 			i++;
 		}
-		// map1(elem);
+		map1(elem);
 	}
 	else
 		ft_printf("no%s", line);
