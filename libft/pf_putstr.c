@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   pf_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/27 21:08:31 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/20 15:36:18 by seshevch         ###   ########.fr       */
+/*   Created: 2018/10/27 21:16:15 by seshevch          #+#    #+#             */
+/*   Updated: 2019/01/25 13:13:33 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "includes/printf.h"
 
-void	ft_putchar(char c)
+void	pf_putstr(char const *s)
 {
-	write(1, &c, 1);
+	write(1, s, ft_strlen(s));
+	g_out += ft_strlen(s);
 }

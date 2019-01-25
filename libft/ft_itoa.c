@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seshevch <seshevch@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 18:01:20 by seshevch          #+#    #+#             */
-/*   Updated: 2018/10/31 13:29:18 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/25 13:33:22 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*ft_check(char *s1, int k, int n)
+static char		*itoa_check(char *s1, int k, int n)
 {
 	int				l;
 	unsigned int	numb;
@@ -58,7 +58,7 @@ char			*ft_itoa(int n)
 			s1[0] = '0';
 			return (s1);
 		}
-		return (ft_check(s1, k, n));
+		return (itoa_check(s1, k, n));
 	}
 	return (NULL);
 }

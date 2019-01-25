@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 15:31:57 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/20 17:03:08 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/25 13:17:50 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <unistd.h>
-# include "gnl/libft/includes/libft.h"
+# include "libft.h"
 
 # define BUFF_SIZE 1
 

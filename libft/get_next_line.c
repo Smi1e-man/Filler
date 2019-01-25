@@ -6,28 +6,11 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 11:35:17 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/20 18:37:32 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/25 14:04:21 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include "filler.h"
-
-char	*ft_strchr(const char *s, int c)
-{
-	int		i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == c)
-			return ((char *)s + i);
-		i++;
-	}
-	if (s[i] == '\0' && c == '\0')
-		return ((char *)s + i);
-	return (0);
-}
+#include "includes/get_next_line.h"
 
 void		ft_ss(t_apok *lst, char **line, unsigned int len)
 {

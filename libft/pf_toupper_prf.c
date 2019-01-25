@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   pf_toupper_prf.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seshevch <seshevch@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/24 17:59:48 by seshevch          #+#    #+#             */
-/*   Updated: 2018/10/31 13:38:40 by seshevch         ###   ########.fr       */
+/*   Created: 2018/10/27 14:27:42 by seshevch          #+#    #+#             */
+/*   Updated: 2019/01/25 14:15:42 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/printf.h"
 
-char	*ft_strdup(const char *s1)
+void	pf_toupper_prf(char **s)
 {
-	char	*s2;
 	int		i;
 
-	s2 = (char*)malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (s2 != NULL)
+	i = 0;
+	while (s[0][i] != '\0')
 	{
-		i = 0;
-		while (s1[i] != '\0')
-		{
-			s2[i] = s1[i];
-			i++;
-		}
-		s2[i] = '\0';
+		if (s[0][i] >= 97 && s[0][i] <= 122)
+			s[0][i] = s[0][i] - 32;
+		i++;
 	}
-	return (s2);
 }
