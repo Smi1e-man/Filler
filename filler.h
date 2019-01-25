@@ -6,7 +6,7 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 15:32:11 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/22 16:27:45 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/23 13:25:45 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@
 typedef struct	s_f
 {
 	char		**plato;
-	int			xy[2];
+	int			sz[2];
 
-	int			pnt;
-	int			numb;
+	int			nb;
 
 }				t_fllr2;
 
@@ -37,10 +36,22 @@ typedef struct	s_fllr
 	t_fllr2		*map;
 	t_fllr2		*ttrmn;
 
+	int			xy[2];
+
+	int			min_sum_xy[2];
+
 }				t_quest;
 /*
 ** filler function
 */
-void			map1(t_quest *elem);
+void			map1(t_quest *el);
+void			hitmap(t_quest *el, int maps[el->map->sz[0]][el->map->sz[1]]);
+void			place_coord_x(t_quest *el,
+							int maps[el->map->sz[0]][el->map->sz[1]]);
+void			place_coord_y(t_quest *el,
+							int maps[el->map->sz[0]][el->map->sz[1]]);
+void			print_int(t_quest *el, int maps[el->map->sz[0]][el->map->sz[1]]);
+
+void			map2(t_quest *el, int maps[el->map->sz[0]][el->map->sz[1]]);
 
 #endif

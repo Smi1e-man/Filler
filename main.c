@@ -6,106 +6,105 @@
 /*   By: seshevch <seshevch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 15:05:06 by seshevch          #+#    #+#             */
-/*   Updated: 2019/01/22 14:13:50 by seshevch         ###   ########.fr       */
+/*   Updated: 2019/01/24 18:18:53 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	plato_malloc(t_fllr2 *elem, int fd, char *line, char type)
+void	plato_malloc(t_fllr2 *el, int fd, char *line, char type)
 {
 	int		i;
 
-	elem->plato = (char **)malloc(sizeof(char *) * (elem->xy[0] + 1));
+	el->plato = (char **)malloc(sizeof(char *) * el->sz[0] + 1);
 	i = 0;
-	while(i < elem->xy[0])
+	while(i < el->sz[0])
 	{
 		get_next_line(fd, &line);
 		if (type == '1')
-			elem->plato[i] = ft_strdup(ft_strchr(line, ' ') + 1);
-		else
-			elem->plato[i] = ft_strdup(line);
+		{
+			el->plato[i] = ft_strdup(ft_strchr(line, ' ') + 1);
+			free(line);
+		}
+		else if (type == '0')
+		{
+			el->plato[i] = ft_strdup(line);
+			free(line);
+		}
 		i++;
 	}
-	elem->plato[i] = NULL;
+	el->plato[i] = NULL;
 }
 
-void	save_xy(t_quest	*elem, int fd, char *line, char type)
+void	save_size(t_quest	*el, char *s1, char type)
 {
 	if (type == '1')
 	{
-		get_next_line(fd, &line);
-		elem->map->xy[0] = ft_atoi(ft_strchr(line, ' '));
-		elem->map->xy[1] = ft_atoi(ft_strrchr(line, ' '));
+		el->map->sz[0] = ft_atoi(ft_strchr(s1, ' '));
+		el->map->sz[1] = ft_atoi(ft_strrchr(s1, ' '));
 	}
 	else
 	{
-		get_next_line(fd, &line);
-		elem->ttrmn->xy[0] = ft_atoi(ft_strchr(line, ' '));
-		elem->ttrmn->xy[1] = ft_atoi(ft_strrchr(line, ' '));
+		el->ttrmn->sz[0] = ft_atoi(ft_strchr(s1, ' '));
+		el->ttrmn->sz[1] = ft_atoi(ft_strrchr(s1, ' '));
 	}
+}
+
+void	struct_free(t_quest	*el)
+{
+	int		i;
+
+	i = -1;
+	while (++i < el->map->sz[0])
+		free(el->map->plato[i]);
+	i = -1;
+	while (++i < el->ttrmn->sz[0])
+		free(el->ttrmn->plato[i]);
+	free(el->ttrmn->plato);
+	free(el->map->plato);
+	free(el->map);
+	free(el->ttrmn);
+	el->xy[0] = 0;
+	el->xy[1] = 0;
+	el->min_sum_xy[0] = 0;
+	el->min_sum_xy[1] = 0;
 }
 
 int		main(void)
 {
-	int			fd;
 	char		*line;
-	char		*s1;
-	t_quest		*elem;
-	char		**map;
-	int			i;
+	t_quest		*el;
+	int			k;
 
-	elem = (t_quest*)malloc(sizeof(t_quest));
-	elem->map = (t_fllr2*)malloc(sizeof(t_fllr2));
-	elem->ttrmn = (t_fllr2*)malloc(sizeof(t_fllr2));
-	fd = open("f2", O_RDWR);
-	get_next_line(fd, &line);
+	el = (t_quest*)malloc(sizeof(t_quest));
+	get_next_line(0, &line);
 	if ((ft_strstr(line, "$$$ exec p")))
 	{
-		elem->plr = line[10];
-		ft_printf("%c\n", elem->plr);
-		save_xy(elem, fd, line, '1');
-		get_next_line(fd, &line);
-		plato_malloc(elem->map, fd, line, '1');
-		ft_printf("%d\n%d\n", elem->map->xy[0], elem->map->xy[1]);
-		i = 0;
-		while(i < elem->map->xy[0])
+		el->plr = line[10] - '0';
+		k = 1;
+		free(line);
+		while (k == 1)
 		{
-			ft_printf("%s\n", elem->map->plato[i]);
-			i++;
+			el->map = (t_fllr2*)malloc(sizeof(t_fllr2));
+			el->ttrmn = (t_fllr2*)malloc(sizeof(t_fllr2));
+			k = get_next_line(0, &line);
+			if (k != 1)
+				return (0);
+			save_size(el, line, '1');
+			free(line);
+			get_next_line(0, &line);
+			free(line);
+			plato_malloc(el->map, 0, line, '1');
+			get_next_line(0, &line);
+			save_size(el, line, '0');
+			free(line);
+			plato_malloc(el->ttrmn, 0, line, '0');
+			map1(el);
+			struct_free(el);
 		}
-		// elem->map->xy[0] -= 1;
-		save_xy(elem, fd, line, '0');
-		ft_printf("%d\n%d\n", elem->ttrmn->xy[0], elem->ttrmn->xy[1]);
-		plato_malloc(elem->ttrmn, fd, line, '0');
-		i = 0;
-		while(i < elem->ttrmn->xy[0])
-		{
-			ft_printf("%s\n", elem->ttrmn->plato[i]);
-			i++;
-		}
-		map1(elem);
+			free(line);
 	}
 	else
-		ft_printf("no%s", line);
-	/* save first text */
-	// char	*line;
-	// char	*buf;
-	// char	*s1;
-	// int		fd;
-
-	// buf = ft_strnew(0);
-	// fd = open("fl", O_WRONLY, O_RDONLY);
-	// while(get_next_line(0, &line) == 1)
-	// {
-	// 	s1 = ft_strjoin(buf, line);
-	// 	free(buf);
-	// 	buf = s1;
-	// 	s1 = ft_strjoin(buf, "\n");
-	// 	free(buf);		
-	// 	buf = s1;
-	// }
-	// 	write(fd, buf, ft_strlen(buf));
-	// free(line);
+		ft_printf("error");
 	return(0);
 }
